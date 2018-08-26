@@ -17,7 +17,7 @@ public class UserController extends BaseAdminController {
 
 	@GetMapping("/getUser")
 	@ResponseBody
-	public User getUser(@RequestParam String username) {
+	public User getUser(@RequestParam(defaultValue="walter") String username) {
 		User user = userRepository.findByUsername(username);
 		return user;
 	}
