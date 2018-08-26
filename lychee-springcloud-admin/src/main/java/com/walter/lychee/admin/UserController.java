@@ -11,7 +11,6 @@ import com.walter.lychee.repository.UserRepository;
 
 @Controller
 public class UserController extends BaseAdminController {
-	
 	@Autowired
 	private UserRepository userRepository;
 
