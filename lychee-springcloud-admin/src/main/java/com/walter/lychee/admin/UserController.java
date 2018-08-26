@@ -11,12 +11,13 @@ import com.walter.lychee.repository.UserRepository;
 
 @Controller
 public class UserController extends BaseAdminController {
+	
 	@Autowired
 	private UserRepository userRepository;
 
 	@GetMapping("/getUser")
 	@ResponseBody
-	public User getUser(@RequestParam(defaultValue="walter") String username) {
+	public User getUser(@RequestParam String username) {
 		User user = userRepository.findByUsername(username);
 		return user;
 	}
