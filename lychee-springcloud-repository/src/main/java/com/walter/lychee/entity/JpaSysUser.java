@@ -1,24 +1,17 @@
 package com.walter.lychee.entity;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.domain.Persistable;
 
 @Entity
 @Table(name = "SYS_USER")
-public class SysUser implements Persistable<Long> {
+public class JpaSysUser implements Persistable<Long> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", unique = true, nullable = false)
@@ -35,23 +28,6 @@ public class SysUser implements Persistable<Long> {
 
 	@Column(length = 1, nullable = false, name = "gender")
 	private String gender;
-
-	@ManyToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.EAGER)
-	@JoinTable(name = "SYS_USER_ROLE", 
-		// 关系被维护端的外键名
-		inverseJoinColumns = @JoinColumn(name = "ROLE_CODE", referencedColumnName = "ROLE_CODE"),
-		// 关系维护端的外键名
-		joinColumns = @JoinColumn(name = "USERNAME", referencedColumnName = "USERNAME")
-	)
-	private Set<SysRole> sysRoles;
-
-	public Set<SysRole> getSysRoles() {
-		return sysRoles;
-	}
-
-	public void setRoles(Set<SysRole> sysRoles) {
-		this.sysRoles = sysRoles;
-	}
 
 	@Override
 	public Long getId() {
