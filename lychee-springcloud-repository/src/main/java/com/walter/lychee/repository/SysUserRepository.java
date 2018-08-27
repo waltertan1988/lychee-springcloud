@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.walter.lychee.entity.User;
+import com.walter.lychee.entity.SysUser;
 
-public interface UserRepository extends JpaRepository<User, Long>{
+public interface SysUserRepository extends JpaRepository<SysUser, Long>{
 
-	public User findByUsername(String username);
+	public SysUser findByUsername(String username);
 	
-	public List<User> findByUserRealName(String userRealName);
+	public List<SysUser> findByUserRealName(String userRealName);
 }
