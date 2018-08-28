@@ -30,16 +30,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		
 		JpaSysUser sysUser = sysUserRepository.findByUsername(username);
 		
-		if(sysUser != null) {
-			Set<GrantedAuthority> authoritySet = new HashSet<GrantedAuthority>();
-			for(JpaSysUserRole jpaSysUserRole : sysUserRoleRepository.findByUsername(username)) {
-				authoritySet.add(new SimpleGrantedAuthority(jpaSysUserRole.getRoleCode()));
-			}
-			UserDetails userDetails = new User(username, sysUser.getPassword(), authoritySet);
-			
-			return userDetails;
+		if(sysUser == null){
+			throw new UsernameNotFoundException(String.format("用户名%s不存在", username));
 		}
 		
-		return null;
+		Set<GrantedAuthority> authoritySet = new HashSet<GrantedAuthority>();
+		for(JpaSysUserRole jpaSysUserRole : sysUserRoleRepository.findByUsername(username)) {
+			authoritySet.add(new SimpleGrantedAuthority(jpaSysUserRole.getRoleCode()));
+		}
+		UserDetails userDetails = new User(username, sysUser.getPassword(), authoritySet);
+		
+		return userDetails;
 	}
 }
