@@ -19,6 +19,7 @@ public class SysUserController extends BaseAdminController {
 	@ResponseBody
 	public JpaSysUser getUser(@RequestParam String username) {
 		JpaSysUser user = sysUserRepository.findByUsername(username);
-		return user;
+		user.setUserRealName("Walter" + System.currentTimeMillis());
+		return sysUserRepository.save(user);
 	}
 }

@@ -7,11 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.data.domain.Persistable;
-
 @Entity
 @Table(name="SYS_ROLE")
-public class JpaSysRole implements Persistable<Long> {
+public class JpaSysRole extends AbstractAuditable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ID", unique = true, nullable = false)
