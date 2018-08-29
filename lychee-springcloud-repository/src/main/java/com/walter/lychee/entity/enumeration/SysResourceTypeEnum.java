@@ -19,4 +19,8 @@ public enum SysResourceTypeEnum {
 	public String toString() {
 		return code;
 	}
+	
+	public boolean sameAs(SysResourceTypeEnum e) {
+		return code.equals(e.getCode());
+	}
 }
