@@ -4,23 +4,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.walter</groupId>
-	<artifactId>lychee-springcloud</artifactId>
+	<artifactId>lychee-springcloud-doc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>lychee-springcloud</name>
+	<name>lychee-springcloud-doc</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
-	<modules>
-		<module>lychee-springcloud-doc</module>
-		<module>lychee-springcloud-parent</module>
-		<module>lychee-springcloud-repository</module>
-		<module>lychee-springcloud-service</module>
-		<module>lychee-springcloud-admin</module>
-		<module>lychee-springcloud-webapp</module>
-	</modules>
 </project>
