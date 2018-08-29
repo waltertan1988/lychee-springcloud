@@ -7,6 +7,10 @@ import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -14,8 +18,14 @@ import org.springframework.data.domain.Auditable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @EntityListeners(AuditingEntityListener.class)
+@MappedSuperclass
 public abstract class AbstractAuditable implements Auditable<String, Long, LocalDateTime> {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID", unique = true, nullable = false)
+	protected Long id;
+	
 	@Column(name="CREATED_BY", length=255)
 	protected String createdBy;
 
@@ -70,5 +80,15 @@ public abstract class AbstractAuditable implements Auditable<String, Long, Local
 	@Override
 	public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
 		this.lastModifiedDate = Date.from(lastModifiedDate.atZone(ZoneId.systemDefault()).toInstant());
+	}
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public boolean isNew() {
+		return false;
 	}
 }
