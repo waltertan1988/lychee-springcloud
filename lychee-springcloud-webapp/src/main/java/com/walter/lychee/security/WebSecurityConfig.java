@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
 	}
 	
-	// 用户授权
+	// 请求授权
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		super.configure(http);
