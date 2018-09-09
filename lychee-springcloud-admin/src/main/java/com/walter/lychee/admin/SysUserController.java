@@ -1,6 +1,7 @@
 package com.walter.lychee.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.access.intercept.DefaultFilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,8 @@ public class SysUserController extends BaseAdminController {
 	
 	@Autowired
 	private SysUserRepository sysUserRepository;
+	@Autowired
+	private DefaultFilterInvocationSecurityMetadataSource securityMetadataSource;
 
 	@GetMapping("/getUser")
 	@ResponseBody
