@@ -18,7 +18,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.intercept.DefaultFilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -80,12 +79,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * @return
 	 */
 	@Bean
-	public DefaultFilterInvocationSecurityMetadataSource securityMetadataSource() {
+	public MyFilterInvocationSecurityMetadataSource securityMetadataSource() {
 		LinkedHashMap<RequestMatcher, Collection<ConfigAttribute>> requestMap = new LinkedHashMap<RequestMatcher, Collection<ConfigAttribute>>();
 		RequestMatcher requestMatcher1 = new RegexRequestMatcher("/admin/.*", null);
 		requestMap.put(requestMatcher1, SecurityConfig.createList("ROLE_ADMIN"));
 
-		return new DefaultFilterInvocationSecurityMetadataSource(requestMap);
+		return new MyFilterInvocationSecurityMetadataSource(requestMap);
 	}
 
 	/**

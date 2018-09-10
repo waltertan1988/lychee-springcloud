@@ -19,6 +19,7 @@
 		<module>lychee-springcloud-doc</module>
 		<module>lychee-springcloud-parent</module>
 		<module>lychee-springcloud-repository</module>
+		<module>lychee-springcloud-base</module>
 		<module>lychee-springcloud-service</module>
 		<module>lychee-springcloud-admin</module>
 		<module>lychee-springcloud-webapp</module>

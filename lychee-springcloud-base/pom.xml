@@ -8,16 +8,16 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../lychee-springcloud-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>lychee-springcloud-service</artifactId>
+	<artifactId>lychee-springcloud-base</artifactId>
 	<packaging>jar</packaging>
 
-	<name>lychee-springcloud-service</name>
+	<name>lychee-springcloud-base</name>
 	<url>http://maven.apache.org</url>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.walter</groupId>
-			<artifactId>lychee-springcloud-base</artifactId>
+			<artifactId>lychee-springcloud-repository</artifactId>
 		</dependency>
 	</dependencies>
 </project>
