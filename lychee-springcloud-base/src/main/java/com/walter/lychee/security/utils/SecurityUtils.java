@@ -15,7 +15,7 @@ public class SecurityUtils {
 		}
 	}
 	
-	public static User getCustomUser() {
+	public static User getUser() {
 		return getUser(SecurityContextHolder.getContext().getAuthentication());
 	}
 }

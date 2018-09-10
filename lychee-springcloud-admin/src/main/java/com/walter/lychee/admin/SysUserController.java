@@ -34,7 +34,6 @@ public class SysUserController extends BaseAdminController {
 	}
 	
 	private void updateAuthority(){
-		
 		ConfigAttribute newConfigAttribute = SecurityConfig.createList("ROLE_LOGIN_USER").get(0);
 		
 		LinkedHashMap<RequestMatcher, Collection<ConfigAttribute>> requestMap = securityMetadataSource.getRequestMap();
