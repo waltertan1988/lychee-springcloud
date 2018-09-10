@@ -27,6 +27,9 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import com.walter.lychee.repository.SysActionRepository;
 import com.walter.lychee.repository.SysMenuRepository;
 import com.walter.lychee.repository.SysRoleResourceRepository;
+import com.walter.lychee.security.authorize.CustomAffirmativeBased;
+import com.walter.lychee.security.authorize.CustomFilterInvocationSecurityMetadataSource;
+import com.walter.lychee.security.authorize.CustomRegexRequestMatcher;
 
 @Configuration
 @EnableWebSecurity

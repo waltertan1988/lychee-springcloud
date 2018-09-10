@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.walter.lychee.entity.JpaSysUser;
 import com.walter.lychee.repository.SysUserRepository;
-import com.walter.lychee.security.CustomFilterInvocationSecurityMetadataSource;
-import com.walter.lychee.security.CustomRegexRequestMatcher;
+import com.walter.lychee.security.authorize.CustomFilterInvocationSecurityMetadataSource;
+import com.walter.lychee.security.authorize.CustomRegexRequestMatcher;
 
 @Controller
 public class SysUserController extends BaseAdminController {
@@ -35,7 +35,7 @@ public class SysUserController extends BaseAdminController {
 	
 	private void updateAuthority(){
 		
-		ConfigAttribute newConfigAttribute = SecurityConfig.createList("ROLE_USER").get(0);
+		ConfigAttribute newConfigAttribute = SecurityConfig.createList("ROLE_LOGIN_USER").get(0);
 		
 		LinkedHashMap<RequestMatcher, Collection<ConfigAttribute>> requestMap = securityMetadataSource.getRequestMap();
 		RequestMatcher requestMatcher1 = new CustomRegexRequestMatcher("/admin/.*", null);
