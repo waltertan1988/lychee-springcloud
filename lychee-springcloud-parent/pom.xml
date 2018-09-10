@@ -46,6 +46,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>servlet-api</artifactId>
+		    <version>2.5</version>
+		    <scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -58,6 +65,11 @@
 			<dependency>
 				<groupId>com.walter</groupId>
 				<artifactId>lychee-springcloud-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.walter</groupId>
+				<artifactId>lychee-springcloud-base</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

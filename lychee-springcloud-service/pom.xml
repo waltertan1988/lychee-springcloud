@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.walter</groupId>
-			<artifactId>lychee-springcloud-repository</artifactId>
+			<artifactId>lychee-springcloud-base</artifactId>
 		</dependency>
 	</dependencies>
 </project>
