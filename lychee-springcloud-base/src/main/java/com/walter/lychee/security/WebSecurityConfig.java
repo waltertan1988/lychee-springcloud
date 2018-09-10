@@ -1,14 +1,17 @@
 package com.walter.lychee.security;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
-import org.springframework.security.access.vote.AbstractAccessDecisionManager;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,7 +22,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
-import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import com.walter.lychee.repository.SysActionRepository;
@@ -47,7 +49,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	// 请求授权
-	@SuppressWarnings("rawtypes")
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -59,10 +60,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						// 设置自己的securityMetadataSource
 						fsi.setSecurityMetadataSource(securityMetadataSource());
 						
-						// 在AccessDecisionManager中加入RoleVoter
-						AbstractAccessDecisionManager accessDecisionManager = (AbstractAccessDecisionManager) fsi
-								.getAccessDecisionManager();
-						accessDecisionManager.getDecisionVoters().add(roleVoter());
+						// 自定义AccessDecisionManager并添加RoleVoter
+						List<AccessDecisionVoter<? extends Object>> decisionVoters = new ArrayList<AccessDecisionVoter<? extends Object>>();
+						decisionVoters.add(roleVoter());
+						AccessDecisionManager accessDecisionManager = new CustomAffirmativeBased(decisionVoters);
+						fsi.setAccessDecisionManager(accessDecisionManager);
+						
+//						// 在AccessDecisionManager中加入RoleVoter
+//						AbstractAccessDecisionManager accessDecisionManager = (AbstractAccessDecisionManager) fsi
+//								.getAccessDecisionManager();
+//						accessDecisionManager.getDecisionVoters().add(roleVoter());
 						return fsi;
 					}
 				})
