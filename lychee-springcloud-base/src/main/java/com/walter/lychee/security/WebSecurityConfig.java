@@ -12,6 +12,7 @@ import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
+import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -27,7 +28,6 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import com.walter.lychee.repository.SysActionRepository;
 import com.walter.lychee.repository.SysMenuRepository;
 import com.walter.lychee.repository.SysRoleResourceRepository;
-import com.walter.lychee.security.authorize.CustomAffirmativeBased;
 import com.walter.lychee.security.authorize.CustomFilterInvocationSecurityMetadataSource;
 import com.walter.lychee.security.authorize.CustomRegexRequestMatcher;
 
@@ -66,13 +66,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						// 自定义AccessDecisionManager并添加RoleVoter
 						List<AccessDecisionVoter<? extends Object>> decisionVoters = new ArrayList<AccessDecisionVoter<? extends Object>>();
 						decisionVoters.add(roleVoter());
-						AccessDecisionManager accessDecisionManager = new CustomAffirmativeBased(decisionVoters);
+						AccessDecisionManager accessDecisionManager = new AffirmativeBased(decisionVoters);
 						fsi.setAccessDecisionManager(accessDecisionManager);
 						
-//						// 在AccessDecisionManager中加入RoleVoter
-//						AbstractAccessDecisionManager accessDecisionManager = (AbstractAccessDecisionManager) fsi
-//								.getAccessDecisionManager();
-//						accessDecisionManager.getDecisionVoters().add(roleVoter());
 						return fsi;
 					}
 				})
@@ -99,7 +95,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	/**
 	 * 按角色进行授权决策
-	 * 
 	 * @return
 	 */
 	@Bean

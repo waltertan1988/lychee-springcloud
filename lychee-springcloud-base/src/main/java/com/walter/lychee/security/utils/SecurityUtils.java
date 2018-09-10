@@ -1,18 +1,21 @@
 package com.walter.lychee.security.utils;
 
-import java.util.Date;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 public class SecurityUtils {
 	
-	private static Date authorityUpdatedTime = new Date();
-	
-	public static void refreshAuthorityUpdatedTime(){
-		synchronized(authorityUpdatedTime){
-			authorityUpdatedTime = new Date();
+	public static User getUser(Authentication authentication) {
+		Object principal = authentication.getPrincipal();
+		if(principal instanceof User) {
+			return (User)principal;
+		}else {
+			return new User(principal.toString(), "", authentication.getAuthorities());
 		}
 	}
 	
-	public static Date getAuthorityUpdatedTime(){
-		return authorityUpdatedTime;
+	public static User getCustomUser() {
+		return getUser(SecurityContextHolder.getContext().getAuthentication());
 	}
 }
