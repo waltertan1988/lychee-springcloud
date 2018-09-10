@@ -79,12 +79,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * @return
 	 */
 	@Bean
-	public MyFilterInvocationSecurityMetadataSource securityMetadataSource() {
+	public CustomFilterInvocationSecurityMetadataSource securityMetadataSource() {
 		LinkedHashMap<RequestMatcher, Collection<ConfigAttribute>> requestMap = new LinkedHashMap<RequestMatcher, Collection<ConfigAttribute>>();
-		RequestMatcher requestMatcher1 = new RegexRequestMatcher("/admin/.*", null);
+		RequestMatcher requestMatcher1 = new CustomRegexRequestMatcher("/admin/.*", null);
 		requestMap.put(requestMatcher1, SecurityConfig.createList("ROLE_ADMIN"));
 
-		return new MyFilterInvocationSecurityMetadataSource(requestMap);
+		return new CustomFilterInvocationSecurityMetadataSource(requestMap);
 	}
 
 	/**
