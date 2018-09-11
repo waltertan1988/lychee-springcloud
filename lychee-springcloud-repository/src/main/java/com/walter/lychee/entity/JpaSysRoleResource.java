@@ -23,6 +23,9 @@ public class JpaSysRoleResource extends AbstractAuditable {
 
 	@Column(name = "ROLE_CODE", length = 255, nullable = false)
 	private String roleCode;
+	
+	@Column(name = "ORDER", nullable = false)
+	private int order = 0;
 
 	public String getResourceCode() {
 		return resourceCode;
@@ -46,5 +49,13 @@ public class JpaSysRoleResource extends AbstractAuditable {
 
 	public void setRoleCode(String roleCode) {
 		this.roleCode = roleCode;
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
 	}
 }
