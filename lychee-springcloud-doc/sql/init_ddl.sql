@@ -47,6 +47,7 @@ CREATE TABLE `sys_action` (
   `is_group` bit(1) NOT NULL,
   `parent_code` varchar(255) COLLATE utf8_bin NOT NULL,
   `uri` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `order` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_38i63eoapprflv3esjdf9036d` (`action_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -78,7 +79,6 @@ CREATE TABLE `sys_role_resource` (
   `resource_code` varchar(255) COLLATE utf8_bin NOT NULL,
   `resource_type` varchar(255) COLLATE utf8_bin NOT NULL,
   `role_code` varchar(255) COLLATE utf8_bin NOT NULL,
-  `order` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK6e17ja7cin5wpidl4kmd820by` (`resource_code`,`resource_type`,`role_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

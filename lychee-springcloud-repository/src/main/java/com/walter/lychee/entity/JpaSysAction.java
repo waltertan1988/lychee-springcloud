@@ -22,6 +22,9 @@ public class JpaSysAction extends AbstractAuditable {
 
 	@Column(name = "URI", length = 255, nullable = true)
 	private String uri;
+	
+	@Column(name = "ORDER", nullable = false)
+	private int order = 0;
 
 	public String getActionCode() {
 		return actionCode;
@@ -61,5 +64,13 @@ public class JpaSysAction extends AbstractAuditable {
 
 	public void setUri(String uri) {
 		this.uri = uri;
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
 	}
 }
