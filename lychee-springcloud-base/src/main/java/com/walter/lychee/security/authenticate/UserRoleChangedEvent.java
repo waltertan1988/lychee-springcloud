@@ -4,26 +4,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.context.ApplicationEvent;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public class UserRoleChangedEvent extends ApplicationEvent{
 	
-	private Set<SimpleGrantedAuthority> removedRoles = new HashSet<SimpleGrantedAuthority>();
-	private Set<SimpleGrantedAuthority> newRoles = new HashSet<SimpleGrantedAuthority>();
-
 	private static final long serialVersionUID = 1L;
+	
+	private String username;
+	private Set<String> roleCodes = new HashSet<String>();
 
-	public UserRoleChangedEvent(Object source, Set<SimpleGrantedAuthority> removedRoles, Set<SimpleGrantedAuthority> newRoles) {
+	public UserRoleChangedEvent(Object source, String username, Set<String> roleCodes) {
 		super(source);
-		this.removedRoles.addAll(removedRoles);
-		this.newRoles.addAll(newRoles);
+		this.username = username;
+		this.roleCodes.addAll(roleCodes);
 	}
 
-	public Set<SimpleGrantedAuthority> getRemovedRoles() {
-		return removedRoles;
+	public String getUsername() {
+		return username;
 	}
 
-	public Set<SimpleGrantedAuthority> getNewRoles() {
-		return newRoles;
+	public Set<String> getRoleCodes() {
+		return roleCodes;
 	}
+
 }

@@ -1,28 +1,28 @@
 package com.walter.lychee.security.authenticate;
 
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
-import org.springframework.context.ApplicationListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-public class CustomUser extends User implements ApplicationListener<UserRoleChangedEvent>{
+public class CustomUser extends User {
 
 	private static final long serialVersionUID = 1L;
+	
+	private Set<GrantedAuthority> authorities;
 
-	public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-		super(username, password, authorities);
+	public CustomUser(String username, String password, Set<GrantedAuthority> authorities) {
+		super(username, password, new HashSet<GrantedAuthority>());
+		this.authorities = authorities;
 	}
 
 	@Override
-	public void onApplicationEvent(UserRoleChangedEvent event) {
-		Collection<GrantedAuthority> grantedAuthorities = this.getAuthorities();
-		grantedAuthorities.removeAll(event.getRemovedRoles());
-		
-		for(GrantedAuthority newRole : event.getNewRoles()) {
-			if(!grantedAuthorities.contains(newRole)) {
-				grantedAuthorities.add(newRole);
-			}
-		}
+	public Set<GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Set<GrantedAuthority> authorities) {
+		this.authorities = authorities;
 	}
 }

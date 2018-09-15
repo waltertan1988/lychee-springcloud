@@ -1,34 +1,29 @@
 package com.walter.lychee.admin;
 
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.security.access.ConfigAttribute;
-import org.springframework.security.access.SecurityConfig;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.walter.lychee.entity.JpaSysUser;
 import com.walter.lychee.repository.SysUserRepository;
 import com.walter.lychee.security.authenticate.UserRoleChangedEvent;
-import com.walter.lychee.security.authorize.CustomFilterInvocationSecurityMetadataSource;
-import com.walter.lychee.security.authorize.CustomRegexRequestMatcher;
+import com.walter.lychee.security.authorize.ResourceRoleChangedEvent;
+import com.walter.lychee.service.vo.ResourceVo;
 
 @Controller
 public class SysUserController extends BaseAdminController {
 	
 	@Autowired
 	private SysUserRepository sysUserRepository;
-	@Autowired
-	private CustomFilterInvocationSecurityMetadataSource securityMetadataSource;
+	
 	@Autowired
 	private ApplicationContext applicationContext;
 
@@ -36,28 +31,49 @@ public class SysUserController extends BaseAdminController {
 	@ResponseBody
 	public JpaSysUser getUser(@RequestParam String username) {
 		JpaSysUser user = sysUserRepository.findByUsername(username);
-		this.updateResRole();
-		this.updateUserRole();
+		
+		Set<String> roleCodes = new HashSet<String>();
+		roleCodes.add("ROLE_ADMIN");
+		roleCodes.add("ROLE_LOGIN_USER");
+		this.updateUserRole("asnpgit", roleCodes);
+		
 		return user;
 	}
 	
-	private void updateResRole(){
-		ConfigAttribute newConfigAttribute = SecurityConfig.createList("ROLE_LOGIN_USER").get(0);
+	/**
+	 * 更新资源
+	 * @param vo
+	 * @return
+	 */
+	@PostMapping("/updateResource")
+	@ResponseBody
+	public boolean updateResource(ResourceVo vo){
 		
-		LinkedHashMap<RequestMatcher, Collection<ConfigAttribute>> requestMap = securityMetadataSource.getRequestMap();
-		RequestMatcher requestMatcher1 = new CustomRegexRequestMatcher("/admin/.*", null);
-		Collection<ConfigAttribute> ca = requestMap.get(requestMatcher1);
-		if(!ca.contains(newConfigAttribute)){
-			ca.add(newConfigAttribute);
-		}
+		// 更新securityMetadataSource中的资源权限
+		ResourceRoleChangedEvent event = new ResourceRoleChangedEvent(this, vo.getUrlPattern(), vo.getHttpMethod(), vo.getRoles());
+		applicationContext.publishEvent(event);
+		
+		//TODO 更新数据库中的资源权限
+		
+		return true;
 	}
 	
-	private void updateUserRole() {
-		Set<SimpleGrantedAuthority> removedRoles = new HashSet<SimpleGrantedAuthority>();
-		Set<SimpleGrantedAuthority> newRoles = new HashSet<SimpleGrantedAuthority>();
-		newRoles.add(new SimpleGrantedAuthority("ROLE_LOGIN_USER"));
+	/**
+	 * 更新指定用户所拥有的角色
+	 * @param username 用户名
+	 * @param roleCodes 更新后的角色编码全集
+	 * @return
+	 */
+	@PostMapping("/updateUserRole/{username}")
+	@ResponseBody
+	public boolean updateUserRole(@PathVariable("username") String username, Set<String> roleCodes) {
 		
-		UserRoleChangedEvent event = new UserRoleChangedEvent(this, removedRoles, newRoles);
+		// 更新用户在UserDetails中的权限
+		UserRoleChangedEvent event = new UserRoleChangedEvent(this, username, roleCodes);
 		applicationContext.publishEvent(event);
+		
+		//TODO 更新数据库中的用户权限
+		
+		return true;
 	}
 }

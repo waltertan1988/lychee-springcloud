@@ -10,4 +10,6 @@ import com.walter.lychee.entity.JpaSysAction;
 public interface SysActionRepository extends JpaRepository<JpaSysAction, Long>{
 
 	public List<JpaSysAction> findByActionCodeIn(Collection<String> actionCodes);
+	
+	public JpaSysAction findByActionCode(String actionCode);
 }

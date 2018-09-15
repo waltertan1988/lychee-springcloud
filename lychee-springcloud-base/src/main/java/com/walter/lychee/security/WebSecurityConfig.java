@@ -19,15 +19,14 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import com.walter.lychee.repository.SysActionRepository;
-import com.walter.lychee.repository.SysMenuRepository;
-import com.walter.lychee.repository.SysRoleResourceRepository;
 import com.walter.lychee.security.authorize.CustomFilterInvocationSecurityMetadataSource;
 import com.walter.lychee.security.authorize.CustomRegexRequestMatcher;
 
@@ -37,12 +36,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
-	@Autowired
-	private SysMenuRepository sysMenuRepository;
-	@Autowired
-	private SysActionRepository sysActionRepository;
-	@Autowired
-	private SysRoleResourceRepository sysRoleResourceRepository;
 
 	// 用户认证
 	@Override
@@ -75,6 +68,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest()
 				.denyAll()
 		.and()
+			.sessionManagement().sessionFixation().changeSessionId()
+								.maximumSessions(1)
+								.maxSessionsPreventsLogin(false)
+								.sessionRegistry(sessionRegistry())
+//								.expiredUrl("/login")
+								.and().invalidSessionUrl("/login")
+		.and()
 			.formLogin()
 		.and()
 			.httpBasic();
@@ -103,4 +103,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		voter.setRolePrefix("");
 		return voter;
 	}
+	
+	/**
+	 * 用于管理全局已登录的会话
+	 * @return
+	 */
+	@Bean
+    public SessionRegistry sessionRegistry(){
+        SessionRegistry sessionRegistry = new SessionRegistryImpl();
+        return sessionRegistry;
+    }
 }
