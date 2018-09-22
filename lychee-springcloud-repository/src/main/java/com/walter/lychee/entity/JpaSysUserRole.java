@@ -2,20 +2,12 @@ package com.walter.lychee.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.springframework.data.domain.Persistable;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="SYS_USER_ROLE")
-public class JpaSysUserRole implements Persistable<Long> {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "ID", unique = true, nullable = false)
-	private long id;
+@Table(name="SYS_USER_ROLE", uniqueConstraints={@UniqueConstraint(columnNames={"USERNAME", "ROLE_CODE"})})
+public class JpaSysUserRole extends AbstractAuditable {
 	
 	@Column(name="USERNAME", length=255, nullable=false)
 	private String username;
@@ -23,16 +15,6 @@ public class JpaSysUserRole implements Persistable<Long> {
 	@Column(name="ROLE_CODE", length=255, nullable=false)
 	private String roleCode;
 	
-	@Override
-	public Long getId() {
-		return id;
-	}
-
-	@Override
-	public boolean isNew() {
-		return false;
-	}
-
 	public String getUsername() {
 		return username;
 	}
@@ -47,9 +29,5 @@ public class JpaSysUserRole implements Persistable<Long> {
 
 	public void setRoleCode(String roleCode) {
 		this.roleCode = roleCode;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 }

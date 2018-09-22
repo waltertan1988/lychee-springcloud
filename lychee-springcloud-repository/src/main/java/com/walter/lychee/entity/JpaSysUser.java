@@ -2,42 +2,23 @@ package com.walter.lychee.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.springframework.data.domain.Persistable;
 
 @Entity
 @Table(name = "SYS_USER")
-public class JpaSysUser implements Persistable<Long> {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID", unique = true, nullable = false)
-	private long id;
+public class JpaSysUser extends AbstractAuditable {
 
-	@Column(name = "username", length = 255, unique = true, nullable = false)
+	@Column(name = "USERNAME", length = 255, unique = true, nullable = false)
 	private String username;
 
-	@Column(length = 255, name = "user_real_name")
+	@Column(length = 255, name = "USER_REAL_NAME")
 	private String userRealName;
 
-	@Column(length = 255, nullable = false, name = "password")
+	@Column(length = 255, nullable = false, name = "PASSWORD")
 	private String password;
 
-	@Column(length = 1, nullable = false, name = "gender")
+	@Column(length = 1, nullable = false, name = "GENDER")
 	private String gender;
-
-	@Override
-	public Long getId() {
-		return id;
-	}
-
-	@Override
-	public boolean isNew() {
-		return false;
-	}
 
 	public String getUsername() {
 		return username;
@@ -69,9 +50,5 @@ public class JpaSysUser implements Persistable<Long> {
 
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 }
