@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 node {
 	try {
 		stage('Checkout') {
