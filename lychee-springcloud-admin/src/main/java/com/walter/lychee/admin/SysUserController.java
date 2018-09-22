@@ -6,19 +6,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.walter.lychee.entity.User;
-import com.walter.lychee.repository.UserRepository;
+import com.walter.lychee.entity.JpaSysUser;
+import com.walter.lychee.repository.SysUserRepository;
 
 @Controller
-public class UserController extends BaseAdminController {
+public class SysUserController extends BaseAdminController {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private SysUserRepository sysUserRepository;
 
 	@GetMapping("/getUser")
 	@ResponseBody
-	public User getUser(@RequestParam String username) {
-		User user = userRepository.findByUsername(username);
+	public JpaSysUser getUser(@RequestParam String username) {
+		JpaSysUser user = sysUserRepository.findByUsername(username);
 		return user;
 	}
 }
