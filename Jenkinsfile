@@ -8,7 +8,7 @@ node {
 		
 		stage('Build') {
 			def mvnHome = tool 'apache-maven-3.2.3'
-			bat """${mvnHome}/bin/mvn clean package -Dmaven.test.skip=true"""
+			bat "${mvnHome}/bin/mvn clean package -Dmaven.test.skip=true"
 		}
 			
 		stage('Deploy') {
