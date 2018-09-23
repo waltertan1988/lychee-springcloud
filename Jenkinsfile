@@ -3,7 +3,7 @@
 node {
 	try {
 		stage('Checkout') {
-			echo "Stage - Checkout"
+			checkout scm
 		}
 		
 		stage('Build') {
