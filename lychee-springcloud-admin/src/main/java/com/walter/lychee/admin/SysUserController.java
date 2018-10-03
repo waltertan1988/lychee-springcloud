@@ -32,10 +32,10 @@ public class SysUserController extends BaseAdminController {
 	public JpaSysUser getUser(@RequestParam String username) {
 		JpaSysUser user = sysUserRepository.findByUsername(username);
 		
-		Set<String> roleCodes = new HashSet<String>();
-		roleCodes.add("ROLE_ADMIN");
-		roleCodes.add("ROLE_LOGIN_USER");
-		this.updateUserRole("asnpgit", roleCodes);
+//		Set<String> roleCodes = new HashSet<String>();
+//		roleCodes.add("ROLE_ADMIN");
+//		roleCodes.add("ROLE_LOGIN_USER");
+//		this.updateUserRole("asnpgit", roleCodes);
 		
 		return user;
 	}
