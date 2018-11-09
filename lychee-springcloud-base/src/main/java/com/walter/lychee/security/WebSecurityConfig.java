@@ -25,6 +25,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import com.walter.lychee.security.authorize.CustomFilterInvocationSecurityMetadataSource;
@@ -76,6 +77,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 								.and().invalidSessionUrl("/login")
 		.and()
 			.formLogin()
+		.and()
+			.logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
 		.and()
 			.httpBasic();
 	}
