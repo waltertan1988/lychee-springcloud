@@ -8,6 +8,8 @@ import javax.persistence.Table;
 @Table(name = "SYS_USER")
 public class JpaSysUser extends AbstractAuditable {
 
+	private static final long serialVersionUID = 1L;
+
 	@Column(name = "USERNAME", length = 255, unique = true, nullable = false)
 	private String username;
 

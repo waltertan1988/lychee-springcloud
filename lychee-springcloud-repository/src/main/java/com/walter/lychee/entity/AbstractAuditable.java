@@ -1,5 +1,6 @@
 package com.walter.lychee.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -19,7 +20,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public abstract class AbstractAuditable implements Auditable<String, Long, LocalDateTime> {
+public abstract class AbstractAuditable implements Auditable<String, Long, LocalDateTime>, Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

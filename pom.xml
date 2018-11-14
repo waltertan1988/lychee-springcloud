@@ -25,7 +25,8 @@
 		<module>lychee-springcloud-admin</module>
 		<module>lychee-springcloud-webapp</module>
 		
-		<module>lychee-springcloud-provider-parent</module>
-		<module>lychee-springcloud-provider-user</module>
+		<module>lychee-springcloud-api-parent</module>
+		<module>lychee-springcloud-api-user</module>
+		<module>lychee-springcloud-api-user-impl</module>
 	</modules>
 </project>

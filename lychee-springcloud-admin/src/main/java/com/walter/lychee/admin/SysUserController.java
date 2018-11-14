@@ -1,6 +1,5 @@
 package com.walter.lychee.admin;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.walter.lychee.entity.JpaSysUser;
-import com.walter.lychee.repository.SysUserRepository;
 import com.walter.lychee.security.authenticate.UserRoleChangedEvent;
 import com.walter.lychee.security.authorize.ResourceRoleChangedEvent;
 import com.walter.lychee.service.vo.ResourceVo;
+import com.walter.lychee.user.api.UserApi;
 
 @Controller
 public class SysUserController extends BaseAdminController {
 	
 	@Autowired
-	private SysUserRepository sysUserRepository;
+	private UserApi userApi;
 	
 	@Autowired
 	private ApplicationContext applicationContext;
@@ -30,7 +29,8 @@ public class SysUserController extends BaseAdminController {
 	@GetMapping("/getUser")
 	@ResponseBody
 	public JpaSysUser getUser(@RequestParam String username) {
-		JpaSysUser user = sysUserRepository.findByUsername(username);
+//		JpaSysUser user = sysUserRepository.findByUsername(username);
+		JpaSysUser user = userApi.getUser(username);
 		
 //		Set<String> roleCodes = new HashSet<String>();
 //		roleCodes.add("ROLE_ADMIN");
