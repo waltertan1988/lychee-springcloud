@@ -18,7 +18,7 @@ import com.walter.lychee.service.vo.ResourceVo;
 import com.walter.lychee.user.api.UserApi;
 
 @Controller
-public class SysUserController extends BaseAdminController {
+public class UserController extends BaseAdminController {
 	
 	@Autowired
 	private UserApi userApi;
@@ -29,7 +29,6 @@ public class SysUserController extends BaseAdminController {
 	@GetMapping("/getUser")
 	@ResponseBody
 	public JpaSysUser getUser(@RequestParam String username) {
-//		JpaSysUser user = sysUserRepository.findByUsername(username);
 		JpaSysUser user = userApi.getUser(username);
 		
 //		Set<String> roleCodes = new HashSet<String>();
