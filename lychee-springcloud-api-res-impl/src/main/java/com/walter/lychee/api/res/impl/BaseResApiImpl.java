@@ -1,4 +1,4 @@
-package com.walter.lychee.res.api.impl;
+package com.walter.lychee.api.res.impl;
 
 import org.jboss.logging.Logger;
 

@@ -19,6 +19,11 @@
 			<groupId>com.walter</groupId>
 			<artifactId>lychee-springcloud-api-user</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.walter</groupId>
+			<artifactId>lychee-springcloud-api-res</artifactId>
+		</dependency>
 	
 		<dependency>
 			<groupId>com.walter</groupId>

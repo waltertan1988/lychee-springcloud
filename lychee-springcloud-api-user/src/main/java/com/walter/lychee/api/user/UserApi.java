@@ -1,4 +1,4 @@
-package com.walter.lychee.user.api;
+package com.walter.lychee.api.user;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

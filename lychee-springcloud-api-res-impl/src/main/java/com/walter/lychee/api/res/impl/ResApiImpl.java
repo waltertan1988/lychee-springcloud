@@ -1,4 +1,4 @@
-package com.walter.lychee.res.api.impl;
+package com.walter.lychee.api.res.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.walter.lychee.api.res.ResApi;
 import com.walter.lychee.entity.JpaSysMenu;
-import com.walter.lychee.res.api.ResApi;
 
 @RestController
 public class ResApiImpl extends BaseResApiImpl implements ResApi {

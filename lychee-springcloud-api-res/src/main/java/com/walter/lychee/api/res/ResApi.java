@@ -1,4 +1,4 @@
-package com.walter.lychee.res.api;
+package com.walter.lychee.api.res;
 
 import java.util.List;
 
