@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.walter.lychee.api.user.UserApi;
 import com.walter.lychee.entity.JpaSysUser;
 import com.walter.lychee.security.authenticate.UserRoleChangedEvent;
 import com.walter.lychee.security.authorize.ResourceRoleChangedEvent;
 import com.walter.lychee.service.vo.ResourceVo;
-import com.walter.lychee.user.api.UserApi;
 
 @Controller
 public class UserController extends BaseAdminController {

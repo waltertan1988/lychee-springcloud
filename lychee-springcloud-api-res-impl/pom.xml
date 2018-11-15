@@ -8,18 +8,13 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../lychee-springcloud-api-parent/pom.xml</relativePath>
 	</parent>
-	<artifactId>lychee-springcloud-api-user-impl</artifactId>
+	<artifactId>lychee-springcloud-api-res-impl</artifactId>
 	<packaging>jar</packaging>
 
 	<name>lychee-springcloud-api-user-impl</name>
 	<description>Demo project for Spring Boot</description>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.walter</groupId>
-			<artifactId>lychee-springcloud-api-user</artifactId>
-		</dependency>
-		
 		<dependency>
 			<groupId>com.walter</groupId>
 			<artifactId>lychee-springcloud-api-res</artifactId>

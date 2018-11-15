@@ -8,9 +8,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients(basePackages="com.walter.lychee.api")
 @EnableCircuitBreaker
-public class LycheeApiUserApplication {
+public class LycheeApiResApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LycheeApiUserApplication.class, args);
+		SpringApplication.run(LycheeApiResApplication.class, args);
 	}
 }
