@@ -1,5 +1,7 @@
 package com.walter.lychee.api.user.impl;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +31,13 @@ public class UserApiImpl extends BaseUserApiImpl implements UserApi {
 		return user;
 	}
 	
-	public JpaSysUser getUserError(){
-		return new JpaSysUser();
+	public JpaSysUser getUserError(@PathVariable("username") String username){
+		
+		JpaSysUser user = new JpaSysUser();
+		
+		user.setCreatedDate(LocalDateTime.now());
+		user.setLastModifiedDate(LocalDateTime.now());
+		
+		return user;
 	}
 }

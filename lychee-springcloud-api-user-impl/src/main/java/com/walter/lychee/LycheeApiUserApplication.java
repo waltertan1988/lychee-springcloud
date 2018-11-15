@@ -6,7 +6,7 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableFeignClients(basePackages="com.walter.lychee.api")
+@EnableFeignClients(basePackages="com.walter.lychee")
 @EnableCircuitBreaker
 public class LycheeApiUserApplication {
 

@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableFeignClients(basePackages="com.walter.lychee.api")
+@EnableFeignClients(basePackages="com.walter.lychee")
 public class LycheeSpringbootApplication {
 
 	public static void main(String[] args) {
