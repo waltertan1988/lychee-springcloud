@@ -1,19 +1,19 @@
-package com.walter.lychee.api.user.impl;
+package com.walter.lychee.user.api.controller;
 
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.walter.lychee.api.res.ResApi;
-import com.walter.lychee.api.user.UserApi;
 import com.walter.lychee.entity.JpaSysUser;
 import com.walter.lychee.repository.SysUserRepository;
+import com.walter.lychee.res.api.ResApi;
 
 @RestController
-public class UserApiImpl extends BaseUserApiImpl implements UserApi {
+public class UserApiController extends BaseUserApiController {
 	
 	@Autowired
 	private ResApi resApi;
@@ -21,19 +21,21 @@ public class UserApiImpl extends BaseUserApiImpl implements UserApi {
 	@Autowired
 	private SysUserRepository sysUserRepository;
 
-	@Override
-	@HystrixCommand(fallbackMethod="getUserError")
+	@GetMapping("/{username}")
+	@HystrixCommand(fallbackMethod="getUserFallback")
 	public JpaSysUser getUser(@PathVariable("username") String username) {
 		JpaSysUser user = sysUserRepository.findByUsername(username);
+		System.out.println("yyyyyyyy");
 		
 		resApi.listMenu(username);
 		
 		return user;
 	}
 	
-	public JpaSysUser getUserError(@PathVariable("username") String username){
+	public JpaSysUser getUserFallback(String username, Throwable throwable){
 		
 		JpaSysUser user = new JpaSysUser();
+		System.out.println("xxxxxxxxxx");
 		
 		user.setCreatedDate(LocalDateTime.now());
 		user.setLastModifiedDate(LocalDateTime.now());

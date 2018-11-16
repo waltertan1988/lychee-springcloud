@@ -1,4 +1,4 @@
-package com.walter.lychee.api.res;
+package com.walter.lychee.res.api;
 
 import java.util.List;
 
@@ -11,6 +11,6 @@ import com.walter.lychee.entity.JpaSysMenu;
 @FeignClient("res")
 public interface ResApi {
 
-	@GetMapping("/api/res/menu/{username}")
+	@GetMapping("/api/res/listMenu/{username}")
 	public List<JpaSysMenu> listMenu(@PathVariable("username") String username);
 }
