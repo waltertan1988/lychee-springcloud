@@ -17,6 +17,9 @@
 
 	<modules>
 		<module>lychee-springcloud-eureka</module>
+		<module>lychee-springcloud-hystrix-dashboard</module>
+
+		
 		<module>lychee-springcloud-doc</module>
 		<module>lychee-springcloud-parent</module>
 		<module>lychee-springcloud-repository</module>
