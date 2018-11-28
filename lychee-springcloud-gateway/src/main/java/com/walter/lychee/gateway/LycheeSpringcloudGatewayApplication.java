@@ -1,4 +1,4 @@
-package com.walter.lychee.eureka;
+package com.walter.lychee.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +11,7 @@ public class LycheeSpringcloudGatewayApplication {
 
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
-		return builder.routes().route(r -> r.path("/jd").uri("http://www.baidu.com").id("jd_route")).build();
+		return builder.routes().route(r -> r.path("/jd").uri("http://www.163.com").id("jd_route")).build();
 	}
 
 	public static void main(String[] args) {
