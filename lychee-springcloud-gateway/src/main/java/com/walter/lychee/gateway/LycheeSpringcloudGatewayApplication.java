@@ -11,7 +11,16 @@ public class LycheeSpringcloudGatewayApplication {
 
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
-		return builder.routes().route(r -> r.path("/jd").uri("http://www.163.com").id("jd_route")).build();
+		return builder.routes()
+				// 一般路由
+				.route("jd_route", r -> r.path("/jd")
+						.uri("http://www.163.com"))
+				// Hystrix熔断路由
+				.route("hystrix_route", r -> r.path("/hystrix")
+						.filters(f -> f.hystrix(c -> c.setName("fallbackcmd1")
+								.setFallbackUri("forward:/fallback/hystrixRoute")))
+						.uri("http://localhost:7201/gateway/hystrixRouteResult"))
+				.build();
 	}
 
 	public static void main(String[] args) {
