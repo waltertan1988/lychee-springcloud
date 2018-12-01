@@ -9,8 +9,10 @@ public class RouteUriController extends BaseGatewayController{
 
 	@ResponseBody
 	@GetMapping("/hystrixRouteResult")
-	public String hystrixRouteResult() throws InterruptedException {
-		Thread.sleep(10000);
+	public String hystrixRouteResult() {
+		
+		System.out.println(1/0);
+		
 		return "Spring Cloud Gateway Hystrix Routed Result!";
 	}
 }
